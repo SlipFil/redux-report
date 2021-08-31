@@ -8,15 +8,45 @@ import {
   FormControl,
   Table,
 } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+
+
+const CarnameInput = ()=> {
+  const dispatch = useDispatch()
+  const [newCarName, setNewCarName] =  useState()
+  const carNameChange = e => setNewCarName(e.target.value)
+  const handleClick = ()=>dispatch({
+    type: 'ADD_CAR',
+    payload: {
+      name: newCarName,
+      id: Date.now()
+    }
+  })
+
+  return(
+    <div>
+      <input value={newCarName} onChange={carNameChange} type='text'  />
+      <button onClick={handleClick}> ADD CAR</button>
+    
+    </div>
+    
+  )
+}
+
 
 const Redux = () => {
+  const cars = useSelector(state => state.cars)
+  
   return (
     <div>
+      <CarnameInput />
       <div className="form-wrapper">
+      
         <Form>
           <Row className="align-items-center">
             <Col xs="auto">
-              <Form.Label htmlFor="inlineFormInput" visuallyHidden>
+              <Form.Label  htmlFor="inlineFormInput" visuallyHidden>
                 Car Name
               </Form.Label>
               <Form.Control
@@ -53,24 +83,17 @@ const Redux = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
+           { cars.map((car)=> { return(
+              <tr key={car.id} >
               <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
+              <td>{car.name}</td>
+              <td>{car.id}</td>
               
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              
-            </tr>
+            </tr >
+            )})}
+            
+            
+            
           </tbody>
         </Table>
       </div>
