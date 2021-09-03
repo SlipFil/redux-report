@@ -1,11 +1,12 @@
 import { ADD_CAR, DELETE_CAR } from "./consts"
 
 
+
 const initialState = {
     cars: [
         {
-        name: "123",
-        price: "123213",
+        name: "Lada",
+        price: "3",
         id: Date.now()
     },
 ]

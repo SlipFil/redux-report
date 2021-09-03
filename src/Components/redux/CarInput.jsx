@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { ADD_CAR } from "../../redux/consts";
 import { Button} from "react-bootstrap";
+import {  useSelector } from "react-redux";
 
 
 function CarInput() {
+  
       const dispatch = useDispatch()
       const [newCarName, setNewCarName] = useState()
       const [newCarPrice, setNewCarPrice] = useState()
