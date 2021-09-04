@@ -1,30 +1,40 @@
-import { observer } from 'mobx-react'
-import React from 'react'
-import { Button, ListGroup } from 'react-bootstrap'
-import Cars from '../../mobx/carsStore.js'
+import { observer } from "mobx-react";
+import React, { useState } from "react";
+import { Button, ListGroup } from "react-bootstrap";
+import Cars from "../../mobx/carsStore.js";
 
 const CarsList = observer(() => {
-      const [car, setcar] = useState()
-      return (
-            <div>
-                  <form action="">
-                        <input type="text" />
-                        <Button onClick={(car) => { Cars.addCar(car) }}>Добавить</Button>
-                  </form>
-                  <br />
-                  <br />
-                  <ListGroup as="ul">
-                        {Cars.cars.map((car) => {
-                              <ListGroup.Item key={car.id} as="li" >
-                                    {car.name}
-                              </ListGroup.Item>
-                        })}
+  const [carName, setCarName] = useState();
+  const carNameChange = (e) => setCarName(e.target.value);
+  const handleClick = ()=>{
+        let car = {name: carName, id: Date.now()}
+        Cars.addCar(car)
+  }
 
-                  </ListGroup>
+  return (
+    <div>
+      <br />
+      <form action="">
+        <input value={carName} type="text" onChange={carNameChange} />{" "}
+        <Button
+          onClick={handleClick}
+        >
+          Добавить
+        </Button>
+      </form>
+      <br />
 
-            </div>
-      )
-})
+      <ListGroup as="ul">
+        {Cars.cars.map((car) => {
+          return (
+            <ListGroup.Item as="li" key={car.id} as="li">
+              {car.name}
+            </ListGroup.Item>
+          );
+        })}
+      </ListGroup>
+    </div>
+  );
+});
 
-export default CarsList
-
+export default CarsList;
