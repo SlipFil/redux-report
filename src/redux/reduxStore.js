@@ -2,7 +2,7 @@ import {createStore, combineReducers} from "redux";
 import reducer from "./reducer";
 
 
-let reducers = combineReducers({reducer});
+let reducers = combineReducers({cars: reducer});
 
 let store = createStore(reducers);
 
