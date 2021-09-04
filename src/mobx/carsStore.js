@@ -11,8 +11,8 @@ class Cars {
       constructor(){
             makeAutoObservable(this)
       }
-      addCar(carName){
-            this.cars.push({name: carName, id: Date.now()})
+      addCar(car){
+            this.cars.push(car)
       }
       deleteCar(id){
             this.cars = this.cars.filter(car => car.id !== id)
